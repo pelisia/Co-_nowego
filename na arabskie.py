@@ -1,61 +1,99 @@
-liczba = input("Podaj liczbę rzymską mniejszą od M: ")
+liczba = input("Podaj liczbę rzymską mniejszą od MMM: ")
 liczba = liczba.upper()
 
-orginał_liczba = liczba
+#Napisać klasę BazaDanychPracowników
+# Można dodać, usunac pracownika, zmienic jego imie, nazwisko, adres, telefon, wypłąte
+# Znaleźć pracownika po takiej danej
+# Znaleźć X najlepiej zarabiajacych pracownikó
+# Wypisac pracownikow spelniajacych jakies kryteria
+# Zapisać stan bazy do pliku i wczytać z pliku
+
+def znajdz_czlon(tekst, dozwolone_znaki):
+    czlon = []
+    for znak in tekst:
+        if znak in dozwolone_znaki:
+            czlon.append(znak)
+            continue
+        break
+    return ''.join(czlon)
+        
+def znajdz_czlon(tekst, dozwolone_znaki):
+    czlon = []
+    for znak in tekst:
+        if znak in dozwolone_znaki:
+            czlon.append(znak)
+            continue
+        break
+    return ''.join(czlon)
+
+
 def zamiana_na_arabskie(liczba):
-        dic_liczb = {"I": 1, "II": 2, "III" : 3, "IV" : 4, "V" : 5,
-                     "VI" : 6, "VII" : 7, "VIII" : 8, "IX" : 9,
-                     "X" : 10, 'L':50, 'C': 100, 'D': 500, 'M': 1000}
+    tysiace = znajdz_czlon(liczba, ["M"])
+    liczba = liczba[len(tysiace):]
+    setki = znajdz_czlon(liczba, ["C", "M", "D"])
+    liczba = liczba[len(setki):]
+    dziesiatki = znajdz_czlon(liczba, ["X", "C", "L"])
+    liczba = liczba[len(dziesiatki):]
+    cyfry = znajdz_czlon(liczba, ["V", "X", "I"])
+    pozostałe_liczby = liczba[len(cyfry):]
 
-        x = 0
-        liczba_na_elementy = []
-        for i in liczba:
-            liczba_na_elementy.append(liczba[x])
-            x += 1
 
-        x = 0
-        wartości_liczb_rzymskich = []
-        y = 0
-        for i in liczba_na_elementy:
-            y = dic_liczb.get(liczba_na_elementy[x])
-            wartości_liczb_rzymskich.append(y)
-            x+=1
+    rzymskie_na_arabskie = {"": 0, "I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VIII": 8, "IX": 9, \
+                            "X": 10, "XX": 20, "XXX": 30, "XL": 40, "L": 50, "LX": 60, "LXX": 70, "LXXX": 80, "XC": 90,
+                            "C": 100, "CC": 200, "CCC": 300, "CD": 400, "D": 500, "DC": 600, "DCC": 700, "DCCC": 800,
+                            "CM": 900, "M": 1000, "MM": 2000, "MMM": 3000}
 
-        suma = 0
-        x = 0
-        for i in wartości_liczb_rzymskich:
-            suma = suma + wartości_liczb_rzymskich[x]
-            x += 1
-#<4;34> i <9:39>
-        if orginał_liczba == "IV" or orginał_liczba == "IX" or orginał_liczba == "XXIV" or orginał_liczba=="XXXIV" or orginał_liczba=="XXIX" or orginał_liczba=="XXXIX" or orginał_liczba == "XIV" or orginał_liczba == "XIX":
-            suma -= 2
-#40,140,..,340 i 90,..,490
-        if orginał_liczba == "XL" or orginał_liczba == "XC" or orginał_liczba == "CXL" or orginał_liczba == "CCXL" or orginał_liczba == "CCCXL" or orginał_liczba == "CCCCXL" or orginał_liczba == "CXC" or orginał_liczba == "CCXC" or orginał_liczba == "CCCXC" or orginał_liczba == "CCCCXC" :
-            suma -= 20
-#400,1400,...,4400 i 900,..4900
-        if orginał_liczba == "MCD" or orginał_liczba == "MMCD" or orginał_liczba == "MMMCD" or orginał_liczba == "MMMMCD" or orginał_liczba == "MCM" or orginał_liczba == "MMCM" or orginał_liczba == "MMMCM" or orginał_liczba == "MMMMCM":
-            suma -=200
-#44,49,94,99
-        if orginał_liczba == "XLIV" or orginał_liczba == "XLIX" or orginał_liczba == "XCIV" or orginał_liczba == "XCIX":
-            suma -=2
-#440,490,940,990,
-        if orginał_liczba=="CDXL" or orginał_liczba=="CDXC" or orginał_liczba == "CMXL" or orginał_liczba == "CMXC":
-            suma -= 220
-#444,494,944,994,449,499,999,949
-        if orginał_liczba=="CDXLIV" or orginał_liczba=="CDXCIV" or orginał_liczba == "CMXLIV"  or orginał_liczba == "CMXCIV" or orginał_liczba == "CMXCIX" or orginał_liczba == "CMXLIX" or orginał_liczba=="CDXCIX" or orginał_liczba=="CDXLIX":
-            suma -= 22
-#40,41....
-        if liczba_na_elementy[0]== "X" and liczba_na_elementy[1] =="L":
-            suma -= 20
-#400,401...
-        if liczba_na_elementy[0]== "C" and liczba_na_elementy[1] =="D":
-            suma -= 200
-#90,91...
-        if liczba_na_elementy[0]== "X" and liczba_na_elementy[1] =="C":
-            suma -= 20
-#900,901...
-        if liczba_na_elementy[0] == "C" and liczba_na_elementy[1] == "M":
-                suma -= 200
-        print(suma)
+    if pozostałe_liczby != "":
+        return "Taka liczba nie istnieje!"
 
-zamiana_na_arabskie(liczba)
+    else:
+        return rzymskie_na_arabskie[tysiace] + rzymskie_na_arabskie[setki] + rzymskie_na_arabskie[dziesiatki] + \
+           rzymskie_na_arabskie[cyfry]
+
+
+print(zamiana_na_arabskie(liczba)) 
+import unittest
+
+class TestujKonwersjeArabskichNaRzymskie(unittest.TestCase):
+    def test_tylko_cyfry(self):
+        self.assertEqual(0, zamiana_na_arabskie(""))
+        self.assertEqual(1, zamiana_na_arabskie("I"))
+        self.assertEqual(2, zamiana_na_arabskie("II"))
+        self.assertEqual(3, zamiana_na_arabskie("III"))
+        self.assertEqual(4, zamiana_na_arabskie("IV"))
+        self.assertEqual(5, zamiana_na_arabskie("V"))
+        self.assertEqual(6, zamiana_na_arabskie("VI"))
+        self.assertEqual(7, zamiana_na_arabskie("VII"))
+        self.assertEqual(8, zamiana_na_arabskie("VIII"))
+        self.assertEqual(9, zamiana_na_arabskie("IX"))
+
+    def test_rozne_dziesiatki(self):
+        self.assertEqual(10, zamiana_na_arabskie("X"))
+        self.assertEqual(15, zamiana_na_arabskie("XV"))
+        self.assertEqual(16, zamiana_na_arabskie("XVI"))
+        self.assertEqual(19, zamiana_na_arabskie("XIX"))
+        self.assertEqual(27, zamiana_na_arabskie("XXVII"))
+        self.assertEqual(39, zamiana_na_arabskie("XXXIX"))
+        self.assertEqual(42, zamiana_na_arabskie("XLII"))
+        self.assertEqual(51, zamiana_na_arabskie("LI"))
+        self.assertEqual(63, zamiana_na_arabskie("LXIII"))
+        self.assertEqual(74, zamiana_na_arabskie("LXXIV"))
+        self.assertEqual(85, zamiana_na_arabskie("LXXXV"))
+        self.assertEqual(98, zamiana_na_arabskie("XCVIII"))
+    
+    def test_rozne_setki(self):
+        self.assertEqual(199, zamiana_na_arabskie("CXCIX"))
+        self.assertEqual(288, zamiana_na_arabskie("CCLXXXVIII"))
+        self.assertEqual(377, zamiana_na_arabskie("CCCLXXVII"))
+        self.assertEqual(466, zamiana_na_arabskie("CDLXVI"))
+        self.assertEqual(555, zamiana_na_arabskie("DLV"))
+        self.assertEqual(644, zamiana_na_arabskie("DCXLIV"))
+        self.assertEqual(733, zamiana_na_arabskie("DCCXXXIII"))
+        self.assertEqual(822, zamiana_na_arabskie("DCCCXXII"))
+        self.assertEqual(911, zamiana_na_arabskie("CMXI"))
+        
+    def test_rozne_tysiace(self):
+        self.assertEqual(1919, zamiana_na_arabskie("MCMXIX"))
+                
+if __name__ == '__main__':
+    unittest.main()
