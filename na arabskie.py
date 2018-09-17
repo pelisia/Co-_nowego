@@ -1,6 +1,6 @@
 liczba = input("Podaj liczbę rzymską mniejszą od MMM: ")
 liczba = liczba.upper()
-
+pierwotna_liczba = liczba
 #Napisać klasę BazaDanychPracowników
 # Można dodać, usunac pracownika, zmienic jego imie, nazwisko, adres, telefon, wypłąte
 # Znaleźć pracownika po takiej danej
@@ -33,8 +33,8 @@ def zamiana_na_arabskie(liczba):
                             "CM": 900, "M": 1000, "MM": 2000, "MMM": 3000}
 
     if len(pozostałe_liczby) != 0 or tysiace not in rzymskie_na_arabskie or setki not in rzymskie_na_arabskie or dziesiatki not in rzymskie_na_arabskie or cyfry not in rzymskie_na_arabskie:
-        return "Taka liczba nie istnieje!"
-
+        print("Taka liczba nie istnieje:")
+        return pierwotna_liczba
     else:
         return rzymskie_na_arabskie[tysiace] + rzymskie_na_arabskie[setki] + rzymskie_na_arabskie[dziesiatki] + \
            rzymskie_na_arabskie[cyfry]
