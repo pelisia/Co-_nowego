@@ -35,9 +35,8 @@ def zamiana_na_arabskie(liczba):
     if len(pozostałe_liczby) != 0 or tysiace not in rzymskie_na_arabskie or setki not in rzymskie_na_arabskie or dziesiatki not in rzymskie_na_arabskie or cyfry not in rzymskie_na_arabskie:
         print("Taka liczba nie istnieje:")
         return pierwotna_liczba
-    else:
-        return rzymskie_na_arabskie[tysiace] + rzymskie_na_arabskie[setki] + rzymskie_na_arabskie[dziesiatki] + \
-           rzymskie_na_arabskie[cyfry]
+
+    return rzymskie_na_arabskie[tysiace] + rzymskie_na_arabskie[setki] + rzymskie_na_arabskie[dziesiatki] + rzymskie_na_arabskie[cyfry]
 
 
 print(zamiana_na_arabskie(liczba)) 
