@@ -16,16 +16,6 @@ def znajdz_czlon(tekst, dozwolone_znaki):
             continue
         break
     return ''.join(czlon)
-        
-def znajdz_czlon(tekst, dozwolone_znaki):
-    czlon = []
-    for znak in tekst:
-        if znak in dozwolone_znaki:
-            czlon.append(znak)
-            continue
-        break
-    return ''.join(czlon)
-
 
 def zamiana_na_arabskie(liczba):
     tysiace = znajdz_czlon(liczba, ["M"])
