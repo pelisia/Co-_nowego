@@ -83,6 +83,7 @@ class TestujKonwersjeArabskichNaRzymskie(unittest.TestCase):
         
     def test_rozne_tysiace(self):
         self.assertEqual(1919, zamiana_na_arabskie("MCMXIX"))
-                
+        self.assertEqual(2751, zamiana_na_arabskie("MMDCCLI"))
+        self.assertEqual(3119, zamiana_na_arabskie("MMMCXIX"))
 if __name__ == '__main__':
     unittest.main()
