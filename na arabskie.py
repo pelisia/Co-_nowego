@@ -32,7 +32,7 @@ def zamiana_na_arabskie(liczba):
                             "C": 100, "CC": 200, "CCC": 300, "CD": 400, "D": 500, "DC": 600, "DCC": 700, "DCCC": 800,
                             "CM": 900, "M": 1000, "MM": 2000, "MMM": 3000}
 
-    if len(pozostałe_liczby) != 0:
+    if len(pozostałe_liczby) != 0 or tysiace not in rzymskie_na_arabskie or setki not in rzymskie_na_arabskie or dziesiatki not in rzymskie_na_arabskie or cyfry not in rzymskie_na_arabskie:
         return "Taka liczba nie istnieje!"
 
     else:
