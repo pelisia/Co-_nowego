@@ -31,13 +31,12 @@ def zamiana_na_arabskie(liczba):
                             "X": 10, "XX": 20, "XXX": 30, "XL": 40, "L": 50, "LX": 60, "LXX": 70, "LXXX": 80, "XC": 90,
                             "C": 100, "CC": 200, "CCC": 300, "CD": 400, "D": 500, "DC": 600, "DCC": 700, "DCCC": 800,
                             "CM": 900, "M": 1000, "MM": 2000, "MMM": 3000}
-
-    if len(pozostałe_liczby) != 0 or tysiace not in rzymskie_na_arabskie or setki not in rzymskie_na_arabskie or dziesiatki not in rzymskie_na_arabskie or cyfry not in rzymskie_na_arabskie:
-        print("Taka liczba nie istnieje:")
-        return pierwotna_liczba
-
-    return rzymskie_na_arabskie[tysiace] + rzymskie_na_arabskie[setki] + rzymskie_na_arabskie[dziesiatki] + rzymskie_na_arabskie[cyfry]
-
+    try:
+        if len(pozostałe_liczby) == 0 and tysiace  in rzymskie_na_arabskie and setki  in rzymskie_na_arabskie and dziesiatki  in rzymskie_na_arabskie and cyfry in rzymskie_na_arabskie:
+            return  rzymskie_na_arabskie[tysiace] + rzymskie_na_arabskie[setki] + rzymskie_na_arabskie[dziesiatki] + rzymskie_na_arabskie[cyfry]
+        raise ValueError
+    except ValueError:
+        return ValueError
 
 print(zamiana_na_arabskie(liczba)) 
 import unittest
@@ -68,7 +67,7 @@ class TestujKonwersjeArabskichNaRzymskie(unittest.TestCase):
         self.assertEqual(74, zamiana_na_arabskie("LXXIV"))
         self.assertEqual(85, zamiana_na_arabskie("LXXXV"))
         self.assertEqual(98, zamiana_na_arabskie("XCVIII"))
-    
+
     def test_rozne_setki(self):
         self.assertEqual(199, zamiana_na_arabskie("CXCIX"))
         self.assertEqual(288, zamiana_na_arabskie("CCLXXXVIII"))
@@ -79,10 +78,11 @@ class TestujKonwersjeArabskichNaRzymskie(unittest.TestCase):
         self.assertEqual(733, zamiana_na_arabskie("DCCXXXIII"))
         self.assertEqual(822, zamiana_na_arabskie("DCCCXXII"))
         self.assertEqual(911, zamiana_na_arabskie("CMXI"))
-        
+
     def test_rozne_tysiace(self):
         self.assertEqual(1919, zamiana_na_arabskie("MCMXIX"))
         self.assertEqual(2751, zamiana_na_arabskie("MMDCCLI"))
         self.assertEqual(3119, zamiana_na_arabskie("MMMCXIX"))
+
 if __name__ == '__main__':
     unittest.main()
