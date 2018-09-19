@@ -31,14 +31,17 @@ def zamiana_na_arabskie(liczba):
                             "X": 10, "XX": 20, "XXX": 30, "XL": 40, "L": 50, "LX": 60, "LXX": 70, "LXXX": 80, "XC": 90,
                             "C": 100, "CC": 200, "CCC": 300, "CD": 400, "D": 500, "DC": 600, "DCC": 700, "DCCC": 800,
                             "CM": 900, "M": 1000, "MM": 2000, "MMM": 3000}
-    try:
-        if len(pozostałe_liczby) == 0 and tysiace  in rzymskie_na_arabskie and setki  in rzymskie_na_arabskie and dziesiatki  in rzymskie_na_arabskie and cyfry in rzymskie_na_arabskie:
-            return  rzymskie_na_arabskie[tysiace] + rzymskie_na_arabskie[setki] + rzymskie_na_arabskie[dziesiatki] + rzymskie_na_arabskie[cyfry]
-        raise ValueError
-    except ValueError:
-        return ValueError
 
-print(zamiana_na_arabskie(liczba)) 
+    if len(pozostałe_liczby) == 0 and tysiace  in rzymskie_na_arabskie and setki  in rzymskie_na_arabskie and dziesiatki  in rzymskie_na_arabskie and cyfry in rzymskie_na_arabskie:
+        return  rzymskie_na_arabskie[tysiace] + rzymskie_na_arabskie[setki] + rzymskie_na_arabskie[dziesiatki] + rzymskie_na_arabskie[cyfry]
+    else:
+        raise ValueError
+
+try:
+    print(zamiana_na_arabskie(liczba))
+except ValueError:
+    print("Error")
+
 import unittest
 
 class TestujKonwersjeArabskichNaRzymskie(unittest.TestCase):
