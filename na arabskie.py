@@ -32,10 +32,11 @@ def zamiana_na_arabskie(liczba):
                             "C": 100, "CC": 200, "CCC": 300, "CD": 400, "D": 500, "DC": 600, "DCC": 700, "DCCC": 800,
                             "CM": 900, "M": 1000, "MM": 2000, "MMM": 3000}
 
-    if len(pozostałe_liczby) == 0 and tysiace  in rzymskie_na_arabskie and setki  in rzymskie_na_arabskie and dziesiatki  in rzymskie_na_arabskie and cyfry in rzymskie_na_arabskie:
-        return  rzymskie_na_arabskie[tysiace] + rzymskie_na_arabskie[setki] + rzymskie_na_arabskie[dziesiatki] + rzymskie_na_arabskie[cyfry]
-    else:
-        raise ValueError
+    if len(pozostałe_liczby) != 0 or tysiace not in rzymskie_na_arabskie or setki not in rzymskie_na_arabskie or dziesiatki not in rzymskie_na_arabskie or cyfry not in rzymskie_na_arabskie:
+       raise ValueError ("Taka liczba nie istnieje")
+
+    return  rzymskie_na_arabskie[tysiace] + rzymskie_na_arabskie[setki] + rzymskie_na_arabskie[dziesiatki] + rzymskie_na_arabskie[cyfry]
+
 
 try:
     print(zamiana_na_arabskie(liczba))
@@ -86,6 +87,25 @@ class TestujKonwersjeArabskichNaRzymskie(unittest.TestCase):
         self.assertEqual(1919, zamiana_na_arabskie("MCMXIX"))
         self.assertEqual(2751, zamiana_na_arabskie("MMDCCLI"))
         self.assertEqual(3119, zamiana_na_arabskie("MMMCXIX"))
+
+    def test_poprawnosci_czlonow(self):
+        with \
+                self.assertRaises(ValueError):zamiana_na_arabskie("MVM") #zla kombinacja liter
+        with \
+                self.assertRaises(ValueError): zamiana_na_arabskie("MMVIG") #uzycie liter nieskladajacych sie na liczby rzymskie
+        with \
+                self.assertRaises(ValueError): zamiana_na_arabskie("MMMMVI") #uzycie czlonu(w tysiacach), ktory nie istnieje
+        with \
+                self.assertRaises(ValueError): zamiana_na_arabskie("MCDDI")  # uzycie czlonu(w setkach), ktory nie istnieje
+        with \
+                self.assertRaises(ValueError): zamiana_na_arabskie("MXXXXIV") #uzycie czlonu(w dziesiatkach), ktory nie istnieje
+        with \
+                self.assertRaises(ValueError): zamiana_na_arabskie("MMVIVIVI")  # uzycie czlonu(w tysiacach), ktory nie istnieje
+        with \
+                self.assertRaises(ValueError):zamiana_na_arabskie("MV8") #uzycie liczby arabskiej
+        with \
+                self.assertRaises(ValueError):zamiana_na_arabskie("MII-") #uzycie zlych znakow(-,= itd.)
+
 
 if __name__ == '__main__':
     unittest.main()
